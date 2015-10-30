@@ -65,6 +65,41 @@ bool wayIter (int x, int y, int targetX, int targetY)
 	return !s.empty();
 }
 
+vector<pair<int, int> > findWayRec (int x, int y, int targetX, int targetY)
+{
+	vector<pair<int, int> > result;
+
+	if (!correct (x,y))
+		//return an empty path: no path exists
+		return result;
+
+	result.push_back (pair<int,int>(x,y));
+
+	if (x == targetX && y == targetY)
+		return result;
+
+	maze[x][y] = 2;
+
+	vector<pair<int, int> > nextSteps;
+
+	nextSteps = findWayRec (x,y-1,targetX,targetY);
+	if (nextSteps.size () == 0)
+		nextSteps = findWayRec (x-1,y,targetX, targetY);
+	if (nextSteps.size () == 0)
+		nextSteps = findWayRec (x+1,y,targetX,targetY);
+	if (nextSteps.size () == 0)
+		nextSteps = findWayRec (x,y+1,targetX,targetY);
+
+	if (nextSteps.size() > 0)
+	{
+		nextSteps.push_back (pair<int,int>(x,y));
+		return nextSteps;
+	}
+
+	return nextSteps;
+
+}
+
 
 void cleanup ()
 {
