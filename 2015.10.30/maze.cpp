@@ -9,10 +9,10 @@ using namespace std;
 #define MAZE_H 5
 
 int maze[MAZE_W][MAZE_H] = {0,1,0,0,0,
-             	      		0,1,0,1,0,
-			                0,1,0,1,0,
-		                	0,0,0,1,0,
-		                	1,1,1,1,0};
+             	      	    0,1,0,1,0,
+			    0,1,0,1,0,
+		            0,0,0,1,0,
+		            1,1,1,1,0};
 bool correct (int x, int y)
 {
 	return x >=0 && x < MAZE_W &&
