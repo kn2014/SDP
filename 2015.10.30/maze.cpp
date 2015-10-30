@@ -35,6 +35,37 @@ bool way (int x, int y, int targetX, int targetY)
 		   way (x,y+1,targetX,targetY);
 }
 
+bool wayIter (int x, int y, int targetX, int targetY)
+{
+
+	stack<pair<int,int> >s;
+
+	s.push (pair<int,int> (x,y));
+
+	while (!s.empty() &&
+		   (s.top().first != targetX ||
+		   	s.top().second != targetY))
+	{
+		pair<int,int> current = s.top();
+		s.pop();
+
+		maze[current.first][current.second]=2;
+
+		if (correct (current.first,current.second-1))
+			s.push (pair<int,int> (current.first,current.second-1));
+		if (correct (current.first-1,current.second))
+			s.push (pair<int,int> (current.first-1,current.second));
+		if (correct (current.first+1,current.second))
+			s.push (pair<int,int> (current.first+1,current.second));
+		if (correct (current.first,current.second+1))
+			s.push (pair<int,int> (current.first,current.second+1));
+
+	}
+
+	return !s.empty();
+}
+
+
 void cleanup ()
 {
 	for (int i = 0; i < MAZE_H; i++)
