@@ -13,12 +13,14 @@ int maze[MAZE_W][MAZE_H] = {0,1,0,0,0,
 			    0,1,0,1,0,
 		            0,0,0,1,0,
 		            1,1,1,1,0};
+		            
 bool correct (int x, int y)
 {
 	return x >=0 && x < MAZE_W &&
 	       y >=0 && y < MAZE_H &&
 	       maze[x][y] == 0;
 }
+
 bool way (int x, int y, int targetX, int targetY)
 {
 	if (!correct (x,y))
@@ -100,6 +102,44 @@ vector<pair<int, int> > findWayRec (int x, int y, int targetX, int targetY)
 
 }
 
+bool wayBfs (int x, int y, int targetX, int targetY)
+{
+	queue <pair<int,int> > q;
+
+	q.push (pair<int,int> (x,y));
+
+	while (!q.empty() &&
+		   (q.front().first != targetX ||
+		   	q.front().second != targetY))
+	{
+		pair<int,int> current = q.front();
+		q.pop();
+
+		if (correct (current.first,current.second-1))
+		{
+			q.push (pair<int,int> (current.first,current.second-1));
+			maze[current.first][current.second-1]=10;
+		}
+		if (correct (current.first-1,current.second))
+		{
+			q.push (pair<int,int> (current.first-1,current.second));
+			maze[current.first-1][current.second]=11;
+		}
+		if (correct (current.first+1,current.second))
+		{
+			q.push (pair<int,int> (current.first+1,current.second));
+			maze[current.first+1][current.second]=12;
+		}
+		if (correct (current.first,current.second+1))
+		{
+			q.push (pair<int,int> (current.first,current.second+1));
+			maze[current.first][current.second+1]=13;
+		}
+
+	}
+
+	return !q.empty();
+}
 
 void cleanup ()
 {
