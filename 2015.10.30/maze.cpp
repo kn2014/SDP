@@ -72,7 +72,7 @@ vector<pair<int, int> > findWayRec (int x, int y, int targetX, int targetY)
 	vector<pair<int, int> > result;
 
 	if (!correct (x,y))
-		//return an empty path: no path exists
+		//връща празен път, ако не съществува такъв
 		return result;
 
 	result.push_back (pair<int,int>(x,y));
