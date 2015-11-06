@@ -157,6 +157,28 @@ void walkBack (int tx, int ty, int x, int y)
 	}
 }
 
+template <class T>
+vector<T> tail (const vector<T> &v)
+{
+	vector<T> result = v;
+	result.erase (result.begin());
+	return result;
+}
+
+void printWay (const vector<pair<int, int> > &way)
+{
+	if (way.size() == 0) //(null? way)
+		return;
+
+	cout << "["
+	     << way[0].first
+	     << ","
+	     << way[0].second
+	     << "] "; //car way
+
+	printWay (tail(way)); //cdr way
+}
+
 void cleanup ()
 {
 	for (int i = 0; i < MAZE_H; i++)
