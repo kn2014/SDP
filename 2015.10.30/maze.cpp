@@ -141,6 +141,22 @@ bool wayBfs (int x, int y, int targetX, int targetY)
 	return !q.empty();
 }
 
+void walkBack (int tx, int ty, int x, int y)
+//намира кой е БИЛ пътят между x,y и tx,ty
+{
+	while (tx != x || ty != y)
+	{
+		cout << "[" << tx << "," << ty << "]";
+		switch (maze[tx][ty])
+		{
+			case 10: ty++; break;
+			case 11: tx++; break;
+			case 12: tx--; break;
+			case 13: ty--; break;
+		}
+	}
+}
+
 void cleanup ()
 {
 	for (int i = 0; i < MAZE_H; i++)
