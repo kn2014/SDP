@@ -1,6 +1,5 @@
 #include <vector>
-#include <iostream>
-#include <algorithm>
+#include <ostream>
 
 template<typename T>
 class BinaryHeap{
