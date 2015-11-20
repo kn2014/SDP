@@ -1,0 +1,9 @@
+magda 3
+1920 up
+1932 oop
+1940 sdp
+velikova	1
+1800 algebra
+galeksa	2
+1802 dis1
+1802 dis2
