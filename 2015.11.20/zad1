@@ -58,17 +58,36 @@ void read_from_file (list<Author>& authors, char* file){
 
 }
 
+void filter(list<Author>& authors, bool (*pred) (const Author&)){
+    list<Author>::iterator iter = authors.begin();
+    while(iter!=authors.end()){
+        if(!pred(*iter)){
+            if(iter+1 ==authors.end())
+            {
+         
+            }
+
+            iter++;
+        }
+    }
+}
+
+bool pred(const Author& author){
+    return author.titles.size()>=2;
+}
 
 
 int main(){
     list<Author> authors;
     read_from_file(authors, "authors.txt");
 
-
+    filter(authors, pred);
     list<Author>::iterator iter = authors.begin();
     while(iter!=authors.end()){
         iter->print();
         iter++;
     }
+
+
 }
 
