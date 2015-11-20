@@ -31,38 +31,44 @@ void read_from_file (list<Author>& authors, char* file){
     in.open(file);
     if(in.is_open())
     {
-        cout<<"if\n";
-        int n,y; char buf[30]; Book book; Author author;
+        int n,y; char buf[30]; Book book;  Author author;
         while(!in.eof())
         {
             in.getline(buf,30,'\t'); in>>n;
             strcpy(author.name,buf);
+//            cout<<buf;
+//            cout<<n;
 
             for(int i=0;i<n;i++)
             {
-                in>>y; in.getline(buf,30);
+                in>>y; in.getline(buf, 30);
                 book.year = y;
                 strcpy(book.name,buf);
                 author.titles.push_back(book);
             }
             list<Author>::iterator iter = authors.begin();
-            while(strcmp(author.name,iter->name)>0){
+            while(iter!=authors.end() && strcmp(author.name,iter->name)>0){
                 iter++;
             }
             authors.insert(iter,author);
+            author.titles.clear();
         }
     }
     in.close();
 
 }
 
+
+
 int main(){
     list<Author> authors;
     read_from_file(authors, "authors.txt");
+
+
     list<Author>::iterator iter = authors.begin();
     while(iter!=authors.end()){
-        cout<<"asd";
         iter->print();
+        iter++;
     }
 }
 
