@@ -1,0 +1,68 @@
+#include<iostream>
+#include<fstream>
+#include<list>
+#include <string.h>
+
+using namespace std;
+
+struct Book{
+    char name[30];
+    int year;
+    void print()const{
+        cout<<name<<" "<<year<<endl;
+    }
+};
+struct Author{
+    char name[30];
+    //int books;
+    list<Book> titles;
+    void print()const{
+        cout<<name<<endl;
+        list<Book>::const_iterator iter = titles.begin();
+        while(iter!=titles.end()){
+            iter->print();
+            iter++;
+        }
+    }
+};
+
+void read_from_file (list<Author>& authors, char* file){
+    ifstream in;
+    in.open(file);
+    if(in.is_open())
+    {
+        cout<<"if\n";
+        int n,y; char buf[30]; Book book; Author author;
+        while(!in.eof())
+        {
+            in.getline(buf,30,'\t'); in>>n;
+            strcpy(author.name,buf);
+
+            for(int i=0;i<n;i++)
+            {
+                in>>y; in.getline(buf,30);
+                book.year = y;
+                strcpy(book.name,buf);
+                author.titles.push_back(book);
+            }
+            list<Author>::iterator iter = authors.begin();
+            while(strcmp(author.name,iter->name)>0){
+                iter++;
+            }
+            authors.insert(iter,author);
+        }
+    }
+    in.close();
+
+}
+
+int main(){
+    list<Author> authors;
+    read_from_file(authors, "authors.txt");
+    list<Author>::iterator iter = authors.begin();
+    while(iter!=authors.end()){
+        cout<<"asd";
+        iter->print();
+    }
+}
+
