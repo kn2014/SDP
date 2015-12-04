@@ -27,3 +27,20 @@ public:
 	void setRoot (const T& newRoot)
 	void addSubTree (const Tree<T>& t)
 	void print (ostream &out)
+private:
+	TreeNode<T> *copyTree (const TreeNode<T> *currentNode)
+	{
+		if (currentNode == NULL)
+			return NULL;
+
+		TreeNode<T> *newNode = new TreeNode<T>;
+
+		newNode->x = currentNode->x;
+
+		for (int i = 0; i < currentNode->children.size(); i++)
+		{
+			newNode->children.push_back (copyTree(currentNode->children[i]));
+		}	
+
+		return newNode;
+	}
