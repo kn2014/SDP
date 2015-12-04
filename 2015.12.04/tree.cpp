@@ -19,12 +19,44 @@ class Tree
 private:
 	TreeNode<T> *root;
 public:
-	Tree ()
+	Tree ():root (NULL)
+	{}
+
 	Tree (const Tree<T>& t)
+	{
+		root = copyTree (t.root);
+	}
+
 	Tree<T>& operator = (const Tree<T> &t)
+	{
+		if (this != &t)
+		{
+			destroy (root);
+			root = copyTree (t.root);		
+		}
+
+		return *this;
+	}
+
 	~Tree ()
+	{
+		destroy (root);
+	}
+
 	bool empty ()
+	{
+		return root == NULL;
+	}
+
 	void setRoot (const T& newRoot)
+	{	
+
+		if (root == NULL)
+		{
+			root = new TreeNode<T>;
+		}
+		root->x = newRoot;
+	}
 	void addSubTree (const Tree<T>& t)
 	{
 		assert (root != NULL);
