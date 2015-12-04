@@ -26,6 +26,11 @@ public:
 	bool empty ()
 	void setRoot (const T& newRoot)
 	void addSubTree (const Tree<T>& t)
+	{
+		assert (root != NULL);
+
+		root->children.push_back (copyTree(t.root));
+	}
 	void print (ostream &out)
 private:
 	TreeNode<T> *copyTree (const TreeNode<T> *currentNode)
