@@ -44,3 +44,17 @@ private:
 
 		return newNode;
 	}
+	
+	void destroy (const TreeNode<T> *currentNode)
+	{
+		if (currentNode == NULL)
+			return;
+
+		for (int i = 0; i < currentNode->children.size(); i++)
+		{
+			destroy (currentNode->children[i]);
+		}
+		
+		delete currentNode;
+
+	}
